@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from backend.services.groq_service import generate_response
+from backend.schemas.prompt import PromptTestRequest
 
 app = FastAPI()
 
@@ -19,3 +20,34 @@ def generate (request:PromptRequest):
         )
     return {"response" : response}
 
+@app.post("/test-prompts")
+def test_prompts(request: PromptTestRequest):
+    results=[]
+
+    for prompt in request.prompts:
+        combined_prompt = f"""
+        Task:
+        {request.task}
+
+        Instruction:
+        {prompt}
+        """
+        try:
+            response = generate_response(combined_prompt)
+            result={
+                "prompt" : prompt,
+                "response" : response
+            }
+            
+        except Exception as e:
+            print(f"Error processing prompt: {e}")
+            result = {
+                "prompt": prompt,
+                "response": None,
+                "error": "Failed to generate response"
+            }
+        results.append(result)
+    return {
+        "task": request.task,
+        "results": results
+    }
