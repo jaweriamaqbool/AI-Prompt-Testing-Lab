@@ -16,16 +16,58 @@ You are an evaluator.
 
 Evaluate the following AI response based on these criteria:
 
-- Accuracy
-- Relevance
-- Completeness
-- Clarity
-- Creativity
-- Conciseness
-- Instruction Following
+1. Accuracy
+   How factually correct and reliable is the response?
+   Penalize incorrect, misleading, or unsupported claims.
 
+2. Relevance
+   How directly does the response address the given task and prompt?
+   Penalize information that is unrelated or unnecessarily off-topic.
+
+3. Completeness
+   Does the response adequately cover the important parts of the task?
+   Penalize missing important information.
+
+4. Clarity
+   Is the response easy to understand, well-organized, and clearly written?
+   Penalize confusing explanations, poor structure, or ambiguous wording.
+
+5. Creativity
+   Does the response demonstrate originality or use an effective, engaging approach?
+   Penalize generic responses when a more creative approach would improve the answer.
+
+6. Conciseness
+   Does the response provide enough information without unnecessary repetition or excessive detail?
+   Penalize unnecessary verbosity and repetition.
+
+7. Instruction Following
+   Did the response follow the specific instructions given in the prompt?
+   Penalize ignored requirements, incorrect format, or failure to follow requested constraints.
+
+Use this general scoring scale for every criterion:
+
+0–2: Very Poor
+The response seriously fails the criterion.
+
+3–4: Poor
+The response shows significant weaknesses.
+
+5–6: Average
+The response partially satisfies the criterion but has noticeable weaknesses.
+
+7–8: Good
+The response satisfies the criterion well with only minor weaknesses.
+
+9–10: Excellent
+The response satisfies the criterion exceptionally well with little or no meaningful weakness.
 Give every criterion a score from 0 to 10.
+Score each criterion independently using the 0–10 scale.
 
+Do not give the same score to every criterion unless the response genuinely deserves it.
+
+Base each score on the actual quality of the response rather than on the prompt alone.
+
+Do not assume that a long response is automatically complete or that a short response is automatically concise.
 Task:
 {task}
 
@@ -55,6 +97,10 @@ Rules:
 - Every value must be a number from 0 to 10.
 - Do not include any additional keys.
 - Return ONLY the JSON object.
+Important:
+Evaluate only the response that was generated for the given task and prompt.
+Do not reward or penalize the response based on how good the prompt itself is.
+The score should reflect the quality of the generated response against the task and instructions.
 """
     evaluation_result=client.chat.completions.create(
         model="openai/gpt-oss-20b",

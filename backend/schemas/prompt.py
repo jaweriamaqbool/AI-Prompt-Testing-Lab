@@ -1,8 +1,15 @@
 from pydantic import BaseModel, Field, field_validator
 
 class PromptTestRequest(BaseModel):
-    task: str = Field(min_length=1)
-    prompts: list[str] = Field(min_length=2)
+    task: str = Field(
+        min_length=1,
+        description="The task that the AI responses should accomplish."
+    )
+
+    prompts: list[str] = Field(
+        min_length=2,
+        description="At least two prompts to compare for the given task."
+    )
 
     @field_validator("task")
     @classmethod
