@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
-
+from fastapi.middleware.cors import CORSMiddleware
 from backend.services.groq_service import generate_response
 from backend.schemas.prompt import PromptTestRequest
 from backend.services.evaluation_service import evaluate_response
@@ -20,6 +20,13 @@ app = FastAPI(
     title="AI Prompt Testing Lab",
     description="An API for testing, evaluating, comparing, and ranking multiple AI prompts.",
     version="1.0.0"
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
