@@ -122,11 +122,10 @@ Before running the project, install:
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone <https://github.com/jaweriamaqbool/AI-Prompt-Testing-Lab.git>
 cd AI-Prompt-Testing-Lab
 ```
 
-Replace `<repository-url>` with the repository URL.
 
 ### 2. Create a Python virtual environment
 
@@ -160,7 +159,7 @@ GROQ_API_KEY=your_groq_api_key_here
 
 Replace the placeholder with your actual Groq API key.
 
-**Do not commit `.env` to Git.**
+
 
 ### 5. Initialize the database
 
